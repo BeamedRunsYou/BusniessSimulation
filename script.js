@@ -2,7 +2,8 @@ let business = {
     name: "",
     balance: 0,
     revenue: 0,
-    expenses: 0
+    expenses: 0,
+    upgrades: 0
 };
 
 function startGame() {
@@ -14,6 +15,7 @@ function startGame() {
         business.balance = initialBalance;
         updateUI();
 
+        document.getElementById('setup').style.display = 'none';
         document.getElementById('gameActions').style.display = 'block';
         document.getElementById('businessTitle').innerText = business.name;
     } else {
@@ -22,25 +24,53 @@ function startGame() {
 }
 
 function earnRevenue() {
-    const amount = parseFloat(prompt("Enter the revenue amount:"));
-    if (!isNaN(amount)) {
-        business.revenue += amount;
-        business.balance += amount;
-        updateUI();
-    } else {
-        alert("Please enter a valid amount.");
-    }
+    const amount = 100 * (1 + business.upgrades * 0.1); // Increase revenue with upgrades
+    business.revenue += amount;
+    business.balance += amount;
+    displayMessage(`Earned revenue: $${amount.toFixed(2)}`);
+    updateUI();
 }
 
 function incurExpense() {
-    const amount = parseFloat(prompt("Enter the expense amount:"));
-    if (!isNaN(amount)) {
-        business.expenses += amount;
-        business.balance -= amount;
+    const amount = 50;
+    business.expenses += amount;
+    business.balance -= amount;
+    displayMessage(`Incurred expense: $${amount.toFixed(2)}`);
+    updateUI();
+}
+
+function upgradeBusiness() {
+    const upgradeCost = 200 * (business.upgrades + 1);
+    if (business.balance >= upgradeCost) {
+        business.upgrades++;
+        business.balance -= upgradeCost;
+        displayMessage(`Upgraded business to level ${business.upgrades}!`);
         updateUI();
     } else {
-        alert("Please enter a valid amount.");
+        displayMessage(`Not enough balance to upgrade. You need $${upgradeCost - business.balance} more.`);
     }
+}
+
+function randomEvent() {
+    const events = [
+        { description: "A competitor goes out of business! Earned bonus revenue.", effect: () => business.balance += 200 },
+        { description: "A fire damages your office. Incurred repair expenses.", effect: () => business.balance -= 150 },
+        { description: "A viral marketing campaign boosts your revenue!", effect: () => business.revenue += 300 },
+        { description: "A lawsuit costs you in legal fees.", effect: () => business.expenses += 100 }
+    ];
+
+    const event = events[Math.floor(Math.random() * events.length)];
+    event.effect();
+    displayMessage(event.description);
+    updateUI();
+}
+
+function displayMessage(message) {
+    const messageDiv = document.getElementById('message');
+    messageDiv.innerText = message;
+    setTimeout(() => {
+        messageDiv.innerText = '';
+    }, 3000);
 }
 
 function showSummary() {
