@@ -1,6 +1,7 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #121212;
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -9,14 +10,12 @@ body {
 }
 
 .container {
-    background-color: #fff;
+    background-color: #1e1e1e;
     padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-h1, h2 {
-    margin: 0 0 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    width: 400px;
+    text-align: center;
 }
 
 button {
@@ -27,6 +26,8 @@ button {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 button:hover {
@@ -36,8 +37,10 @@ button:hover {
 input {
     margin: 10px 0;
     padding: 8px;
-    width: 100%;
+    width: calc(100% - 16px);
     box-sizing: border-box;
     border-radius: 5px;
     border: 1px solid #ccc;
+    background-color: #333;
+    color: #fff;
 }
