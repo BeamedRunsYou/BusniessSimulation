@@ -10,15 +10,17 @@
     <div class="container">
         <h1>Business Simulation Game</h1>
         <div id="game">
-            <div>
-                <label for="businessName">Business Name:</label>
-                <input type="text" id="businessName">
+            <div id="setup">
+                <div>
+                    <label for="businessName">Business Name:</label>
+                    <input type="text" id="businessName">
+                </div>
+                <div>
+                    <label for="initialBalance">Initial Balance:</label>
+                    <input type="number" id="initialBalance">
+                </div>
+                <button onclick="startGame()">Start Game</button>
             </div>
-            <div>
-                <label for="initialBalance">Initial Balance:</label>
-                <input type="number" id="initialBalance">
-            </div>
-            <button onclick="startGame()">Start Game</button>
 
             <div id="gameActions" style="display: none;">
                 <h2 id="businessTitle"></h2>
@@ -29,7 +31,11 @@
 
                 <button onclick="earnRevenue()">Earn Revenue</button>
                 <button onclick="incurExpense()">Incur Expense</button>
+                <button onclick="upgradeBusiness()">Upgrade Business</button>
+                <button onclick="randomEvent()">Random Event</button>
                 <button onclick="showSummary()">Show Summary</button>
+                
+                <div id="message"></div>
             </div>
         </div>
     </div>
